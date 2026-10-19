@@ -1,0 +1,658 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#081d27">
+  <title>Breakwater | Less chasing. More surfing.</title>
+  <style>
+    :root {
+      --navy: #081d27;
+      --navy2: #123441;
+      --mint: #b9f3db;
+      --white: #ffffff;
+      --text: #18313a;
+      --muted: #60727a;
+      --paper: #f5f8f7;
+      --border: #e0e9e7;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: white;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    header {
+      background: var(--navy);
+      color: white;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 27px;
+      font-weight: 900;
+      color: var(--mint);
+      text-decoration: none;
+      letter-spacing: -1.5px;
+    }
+
+    .nav-label {
+      color: #c5d8dc;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-align: right;
+    }
+
+    .hero {
+      padding: 24px 0 85px;
+      background: var(--navy);
+      color: white;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 20px;
+      background: #245365;
+    }
+
+    .eyebrow {
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(46px, 8vw, 82px);
+      line-height: 1.04;
+      letter-spacing: -3px;
+      margin: 20px 0;
+    }
+
+    .hero p {
+      color: #d1e0e3;
+      font-size: 18px;
+      max-width: 560px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 13px 25px;
+      border-radius: 10px;
+      background: var(--mint);
+      color: var(--navy);
+      font-weight: 800;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      font-size: 15px;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: .93;
+    }
+
+    section {
+      padding: 78px 0;
+    }
+
+    h2 {
+      font-size: clamp(30px, 5vw, 48px);
+      letter-spacing: -1.5px;
+      line-height: 1.12;
+      margin: 0 0 20px;
+    }
+
+    .intro {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 670px;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 35px;
+    }
+
+    .problem-card {
+      background: var(--paper);
+      border-radius: 16px;
+      padding: 24px 12px;
+      text-align: center;
+    }
+
+    .problem-icon {
+      font-size: 32px;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .problem-card strong {
+      font-size: 14px;
+    }
+
+    .quote {
+      border-left: 4px solid #76d5b2;
+      padding: 15px 22px;
+      background: #f0faf5;
+      margin-top: 32px;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .quote p {
+      margin: 0 0 8px;
+      font-size: 17px;
+      font-style: italic;
+    }
+
+    .quote small {
+      color: var(--muted);
+    }
+
+    .how {
+      background: var(--paper);
+    }
+
+    .steps {
+      display: grid;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .step {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      background: #e9f2ef;
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-weight: 900;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .step h3 {
+      margin: 0 0 5px;
+      font-size: 20px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .pricing {
+      text-align: center;
+    }
+
+    .price-card {
+      max-width: 490px;
+      margin: 30px auto 0;
+      padding: 42px 24px;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+    }
+
+    .plan {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--muted);
+      letter-spacing: 2px;
+    }
+
+    .price {
+      font-size: 64px;
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: 1.2;
+    }
+
+    .price span {
+      font-size: 17px;
+      color: var(--muted);
+      letter-spacing: 0;
+      font-weight: normal;
+    }
+
+    .price-card p {
+      margin: 8px 0;
+    }
+
+    .small-print {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 20px !important;
+    }
+
+    .waitlist {
+      background: var(--mint);
+      padding: 65px 0;
+    }
+
+    .waitlist-inner {
+      max-width: 640px;
+    }
+
+    .waitlist h2 {
+      max-width: 580px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    input {
+      padding: 16px;
+      font-size: 16px;
+      border: 1px solid #94b8ab;
+      border-radius: 10px;
+      width: 100%;
+      outline-color: var(--navy);
+    }
+
+    .dark-btn {
+      background: var(--navy);
+      color: white;
+    }
+
+    .thank-you {
+      display: none;
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 10px;
+      background: #eafff3;
+      font-weight: 700;
+    }
+
+    footer {
+      background: var(--navy);
+      color: white;
+      padding: 35px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    footer a {
+      color: var(--mint);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (min-width: 760px) {
+      .hero-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-image {
+        height: 500px;
+      }
+
+      .steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .step {
+        display: block;
+      }
+
+      .step-number {
+        display: inline-block;
+        margin-bottom: 20px;
+      }
+
+      form {
+        flex-direction: row;
+      }
+
+      form input {
+        flex: 1;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .problem-grid {
+        gap: 7px;
+      }
+
+      .problem-card {
+        padding: 18px 5px;
+      }
+
+      .problem-card strong {
+        font-size: 12px;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="logo">≈ breakwater.</a>
+        <span class="nav-label">
+          IRISH SURF SCHOOLS
+        </span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="container hero-grid">
+
+      <div>
+        <div class="eyebrow">
+          Built for independent Irish surf schools
+        </div>
+
+        <h1>
+          Less chasing.<br>
+          More surfing.
+        </h1>
+
+        <p>
+          When the weather cancels lessons,
+          Breakwater helps you rebook customers
+          and keep track of potential income.
+        </p>
+
+        <a
+          class="btn"
+          href="https://normabryan.github.io/Demo/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Try the live demo ↗
+        </a>
+      </div>
+
+      <img
+        class="hero-image"
+        src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=85"
+        alt="Surfer riding a wave"
+      >
+
+    </div>
+  </div>
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <div class="container">
+
+      <h2>
+        The forecast changes.<br>
+        Your workload doubles.
+      </h2>
+
+      <p class="intro">
+        Cancelled lessons mean phone calls,
+        messages and customers waiting
+        for another date.
+      </p>
+
+      <div class="problem-grid">
+
+        <div class="problem-card">
+          <span class="problem-icon">🌧️</span>
+          <strong>Weather</strong>
+        </div>
+
+        <div class="problem-card">
+          <span class="problem-icon">📞</span>
+          <strong>Chasing</strong>
+        </div>
+
+        <div class="problem-card">
+          <span class="problem-icon">💶</span>
+          <strong>Lost bookings</strong>
+        </div>
+
+      </div>
+
+      <div class="quote">
+        <p>
+          "When the weather turns, I spend
+          hours trying to find everyone
+          another lesson."
+        </p>
+        <small>
+          Illustrative owner statement for
+          this student project, not a real interview.
+        </small>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="container">
+
+      <h2>Three steps back to the water.</h2>
+
+      <p class="intro">
+        A simpler way to handle cancellations,
+        rebook customers and see what's at risk.
+      </p>
+
+      <div class="steps">
+
+        <div class="step">
+          <span class="step-number">01</span>
+          <div>
+            <h3>Cancel a lesson</h3>
+            <p>
+              Move affected customers
+              into the rebooking queue.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-number">02</span>
+          <div>
+            <h3>Find another slot</h3>
+            <p>
+              See suitable future lessons
+              with enough spaces.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-number">03</span>
+          <div>
+            <h3>Protect your income</h3>
+            <p>
+              Track customers waiting
+              and the money at risk.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+
+      <h2>Simple pricing. No big setup.</h2>
+
+      <p class="intro" style="margin:auto">
+        Designed for small independent surf schools.
+      </p>
+
+      <div class="price-card">
+
+        <div class="plan">BREAKWATER STARTER</div>
+
+        <div class="price">
+          €49<span>/month</span>
+        </div>
+
+        <p>Plus €99 one-off setup</p>
+
+        <p>
+          One place to manage weather cancellations,
+          rebookings and money at risk.
+        </p>
+
+        <p class="small-print">
+          Proposed student-project pricing.
+          Not a live commercial offer.
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WAITING LIST -->
+  <section class="waitlist" id="waitlist">
+    <div class="container">
+      <div class="waitlist-inner">
+
+        <h2>
+          Ready for calmer cancellation days?
+        </h2>
+
+        <p>
+          Join the demonstration waiting list.
+        </p>
+
+        <form id="waitlistForm">
+
+          <input
+            id="email"
+            type="email"
+            placeholder="Your email address"
+            aria-label="Your email address"
+            required
+          >
+
+          <button class="btn dark-btn" type="submit">
+            Join waiting list
+          </button>
+
+        </form>
+
+        <div
+          id="thankYou"
+          class="thank-you"
+          role="status"
+          aria-live="polite"
+        >
+          ✓ Thank you! This is a demonstration.
+          No information has been saved or sent.
+        </div>
+
+        <p class="small-print">
+          Student project demonstration.
+          Email addresses are not collected or stored.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+
+      <a href="#" class="logo">≈ breakwater.</a>
+
+      <a href="notes.html">
+        Behind the build →
+      </a>
+
+    </div>
+  </footer>
+
+  <script>
+    // Demonstration only.
+    // No data is saved or sent anywhere.
+
+    const form = document.getElementById("waitlistForm");
+    const thankYou = document.getElementById("thankYou");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      // Show confirmation without collecting data.
+      form.reset();
+      form.style.display = "none";
+      thankYou.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
